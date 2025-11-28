@@ -1,0 +1,18 @@
+spring.application.name=FlightBookingSystem
+server.port=8080
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/flightbookingDB
+spring.datasource.username=postgres
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# HikariCP Pool Settings
+spring.datasource.hikari.maximum-pool-size=5
+spring.datasource.hikari.minimum-idle=2
+spring.datasource.hikari.idle-timeout=30000
+spring.datasource.hikari.max-lifetime=600000
+spring.datasource.hikari.connection-timeout=20000

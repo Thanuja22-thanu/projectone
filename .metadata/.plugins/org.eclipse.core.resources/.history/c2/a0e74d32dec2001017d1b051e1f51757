@@ -1,0 +1,69 @@
+package com.flightbooking.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.flightbooking.dto.ResponseStructure;
+import com.flightbooking.entity.Passenger;
+import com.flightbooking.entity.Payment;
+import com.flightbooking.service.PaymentService;
+
+@RestController
+@RequestMapping("/payment")
+public class PaymentController {
+
+    @Autowired
+    private PaymentService paymentservice;
+
+    @PostMapping
+    public ResponseEntity<ResponseStructure<Payment>> savePayment(@RequestBody Payment payment) {
+        return paymentservice.savePayment(payment);
+    }
+
+    @GetMapping
+    public ResponseEntity<ResponseStructure<List<Payment>>> getAllPayments() {
+        return paymentservice.getAllPayments();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseStructure<Payment>> getPaymentById(@PathVariable Integer id) {
+        return paymentservice.getPaymentById(id);
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<ResponseStructure<List<Payment>>> getByStatus(@PathVariable String status) {
+        return paymentservice.getPaymentByStatus(status);
+    }
+
+    @GetMapping("/amount-greater/{amount}")
+    public ResponseEntity<ResponseStructure<List<Payment>>> getByAmountGreater(@PathVariable Double amount) {
+        return paymentservice.getPaymentsGreaterThan(amount);
+    }
+
+    @GetMapping("/mode/{mode}")
+    public ResponseEntity<ResponseStructure<List<Payment>>> getByMode(@PathVariable String mode) {
+        return paymentservice.getPaymentByMode(mode);
+    }
+
+    @PutMapping("/{id}/status/{status}")
+    public ResponseEntity<ResponseStructure<Payment>> updateStatus(
+            @PathVariable Integer id, @PathVariable String status) {
+        return paymentservice.updatePaymentStatus(id, status);
+    }
+    @GetMapping("/page/{pagenumber}/{pagesize}/{field}")
+	public ResponseEntity<ResponseStructure<Page<Payment>>> getpaymentbypageandsort(@PathVariable int pagenumber,@PathVariable int pagesize,@PathVariable String field){
+		return paymentservice. getpaymentbypageandsort(pagenumber,pagesize,field);
+	
+	}
+
+}

@@ -1,0 +1,65 @@
+package com.flightbooking.controller;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.flightbooking.dto.ResponseStructure;
+import com.flightbooking.entity.Booking;
+import com.flightbooking.service.BookingService;
+
+@RestController
+@RequestMapping("/booking")
+public class BookingController{
+	@Autowired
+	private BookingService bookingService;
+	@PostMapping
+	public ResponseEntity<ResponseStructure<Booking>> createbooking(@RequestBody Booking booking){
+	return bookingService.createbooking(booking);
+	
+}
+	@GetMapping
+	public ResponseEntity<ResponseStructure<List<Booking>>> getallbooking(){
+		return bookingService.getallbooking();
+
+	
+}
+	@GetMapping("/id/{id}")
+	public ResponseEntity<ResponseStructure<Booking>> getbookingbyid( @PathVariable Integer id){
+		return bookingService.getbookingbyid(id);
+	
+}
+	@GetMapping("/bookingdate/{bookingdate}")
+	public ResponseEntity<ResponseStructure< List<Booking>>> getbookingbydate( @PathVariable LocalDate bookingdate){
+		return bookingService.getbookingbydate(bookingdate);
+	
+	
+	
+}
+	@GetMapping("/flight/{flightid}")
+	public ResponseEntity<ResponseStructure< List<Booking>>> getbookingbyflightid( @PathVariable Integer flightid){
+		return bookingService. getBookingsByFlightId(flightid);
+	
+	
+	}
+	
+	
+	@GetMapping("/status/{bookingstatus}")
+	public ResponseEntity<ResponseStructure< List<Booking>>> getbookingbystatus( @PathVariable String bookingstatus){
+		return bookingService.getbookingbystatus(bookingstatus);
+	
+	
+	
+}
+}
+
+

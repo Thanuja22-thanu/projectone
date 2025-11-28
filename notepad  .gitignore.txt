@@ -1,0 +1,14 @@
+# Eclipse
+.metadata/
+bin/
+target/
+.settings/
+
+# Java
+*.class
+*.jar
+
+# Others
+*.log
+
+
