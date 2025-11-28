@@ -1,5 +1,0 @@
-package com.flightbooking.entity;
-
-public enum Bookingstatus {
-
-}

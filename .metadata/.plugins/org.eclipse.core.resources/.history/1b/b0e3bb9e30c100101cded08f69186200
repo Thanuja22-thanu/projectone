@@ -1,5 +1,0 @@
-package com.flightbooking.exception;
-
-public class Bookingnotfoundexception {
-
-}
