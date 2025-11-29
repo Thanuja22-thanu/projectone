@@ -1,0 +1,39 @@
+package com.flightbooking.entity;
+
+
+
+
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
+@Data
+@Entity
+public class Flight {
+	@Id
+	@GeneratedValue
+	
+	private Integer id;
+	private String airline;
+    private	String source;
+    private String destination;
+    private LocalTime arrivedtime;
+    private LocalTime departuretime;
+    private Integer totalseats;
+    private double price;
+    @OneToMany(mappedBy="flight",cascade=CascadeType.ALL)
+    @JsonIgnore
+	private List<Booking> bookings;
+	
+
+}

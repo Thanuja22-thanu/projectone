@@ -1,0 +1,57 @@
+package com.flightbooking.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
+
+import com.flightbooking.entity.Passenger;
+import com.flightbooking.entity.Payment;
+import com.flightbooking.entity.Paymentmode;
+import com.flightbooking.entity.Paymentstatus;
+import com.flightbooking.repository.PaymentRepository;
+
+@Repository
+	public class PaymentDao {
+
+	    @Autowired
+	    private PaymentRepository repo;
+
+	    public Payment savePayment(Payment payment) {
+	        return repo.save(payment);
+	    }
+
+	    public List<Payment> getAllPayments() {
+	        return repo.findAll();
+	    }
+
+	    public Optional<Payment> getPaymentById(Integer id) {
+	        return repo.findById(id);
+	    }
+
+	    public List<Payment> getPaymentByStatus(Paymentstatus status) {
+	        return repo.findByStatus(status);
+	    }
+
+	    public List<Payment> getPaymentsGreaterThan(Double amount) {
+	        return repo.findByAmountGreaterThan(amount);
+	    }
+
+	    public List<Payment> getPaymentByMode(Paymentmode mode) {
+	        return repo.findByPaymentmode(mode);
+	    }
+
+	    public Payment updatePayment(Payment payment) {
+	        return repo.save(payment);
+	    }public Page<Payment> getpaymenttByPageAndSort(int pagenumber, int pagesize, String field) {
+	    	
+	    	return repo.findAll(PageRequest.of(pagenumber, pagesize,Sort.by(field).descending()));
+	    }
+	}
+
+
+
